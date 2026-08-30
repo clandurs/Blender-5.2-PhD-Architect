@@ -1,4 +1,4 @@
 interface:
-  display_name: "Blender 5.2 PHD Architect"
-  short_description: "Govern Blender work from topology through evidence"
-  default_prompt: "Use $blender-5-2-phd-architect for this Blender task, including any background-mode process."
+  display_name: "Blender 5.2 PhD Architect"
+  short_description: "Expert Blender 5.2 technical-art guidance"
+  default_prompt: "Use $blender-5-2-phd-architect to architect or diagnose this Blender 5.2 task."
