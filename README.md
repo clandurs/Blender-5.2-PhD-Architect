@@ -50,7 +50,11 @@ blender-5-2-phd-architect/
 |-- references/
 |   |-- official-blender.md
 |   |-- academic-sources.md
-|   `-- production-pipeline-sources.md
+|   |-- production-pipeline-sources.md
+|   |-- topology-readiness.md
+|   |-- rigging-and-weights.md
+|   |-- animation-and-evidence.md
+|   `-- pose-manifest.md
 |-- knowledge/
 |   |-- modeling.md
 |   |-- sculpting.md
@@ -78,7 +82,10 @@ blender-5-2-phd-architect/
 |   |-- cinematic-production.md
 |   `-- debugging-playbook.md
 `-- scripts/
-    `-- validate_repository.py
+    |-- validate_repository.py
+    |-- blender_character_audit.py
+    |-- compare_audits.py
+    `-- render_pose_suite.py
 ```
 
 ## Source model

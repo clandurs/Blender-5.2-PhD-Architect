@@ -131,6 +131,28 @@ Lead with the result or current blocker. Include:
 
 Use **verified**, **observed**, **inferred**, **untested**, and **blocked** precisely. Do not call a viewport check a render validation or a Blender re-import a consumer validation.
 
+## Character deformation and animation fast-path
+
+For character hands, humanoid rigs, combat actions, or engine-bound animation, use this five-stage barrier:
+
+1. **Topology readiness:** inspect named joint regions, bend rows, digit separation, manifold state, and joint-spanning triangles. Read [topology-readiness.md](references/topology-readiness.md).
+2. **Rig construction:** fit Rigify or a minimal deform skeleton to actual bend rows and measured local flexion planes. Read [rigging-and-weights.md](references/rigging-and-weights.md).
+3. **Weights and correctives:** isolate digit chains, normalize the target influence ceiling, test Preserve Volume, then add narrowly driven correctives only after topology and weights pass.
+4. **Animation authoring:** freeze action name, FPS, frame range, loop/root-motion policy, contact, recovery, and export target before keying. Read [animation-and-evidence.md](references/animation-and-evidence.md).
+5. **Automated evidence:** audit the `.blend`, render standardized poses, reopen the produced copy, and compare it with the accepted baseline. Read [pose-manifest.md](references/pose-manifest.md).
+
+If topology readiness fails, skip stages 2–4. Run only non-mutating evidence collection and report `HOLD`; do not loop through bone roll, weights, pose angles, Preserve Volume, or shape keys to compensate for absent joint topology.
+
+For hands, prove open, relaxed, half-curl, closed-fist, thumb-opposition, individual-index, and wrist-deformation states before authoring combat animation. A fist must bring fingertips toward the palm, keep the thumb naturally outside the fingers, preserve knuckle/palm/thumb-pad volume, and avoid visible tearing, voids, hooks, spikes, collapse, or game-distance intersections.
+
+Use the included deterministic helpers with absolute paths in background mode:
+
+- `scripts/blender_character_audit.py` for topology, deform-weight, armature, action-contract, and preservation evidence;
+- `scripts/render_pose_suite.py` for manifest-driven orthographic pose renders that restore the original pose exactly and never save the source;
+- `scripts/compare_audits.py` for strict baseline comparison with explicit expected bone/action additions.
+
+Treat mesh repair, rigging, action creation, export, and consumer integration as separately reviewable outcomes. Permit one normal build and one bounded correction for the same defect; repeated failure requires a method or prerequisite redesign rather than a renamed retry.
+
 ## Safety and trust
 
 Treat blend-files, Python, drivers, extensions, and add-ons as executable content. Do not enable automatic script execution for an untrusted source. Inspect manifests and code before installation. Keep online access off unless the task needs it and the user authorizes the relevant external action.
